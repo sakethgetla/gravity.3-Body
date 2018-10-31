@@ -1,0 +1,100 @@
+package evolution;
+
+import java.awt.Canvas;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
+
+
+public class Main extends Canvas implements Runnable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	boolean running = false;
+	static int WIDTH = 900, HEIGHT = (WIDTH/4)*3;
+	Thread thread ;
+	public static void main(String args[]) {
+		new Main();
+		
+	
+
+	}
+	public Main(){
+
+		
+
+		start();
+		String title = "evolution";
+
+		JFrame frame = new JFrame(title);
+// /*		
+		frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		frame.setMaximumSize(new Dimension(WIDTH, HEIGHT));
+		frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.add(this);
+	}
+	private void start(){
+		thread = new Thread();
+		thread.start();
+		running =true;
+		run();
+		//System.out.println("akwdh");
+
+
+	}
+	private void stop(){
+		try{
+			thread.join();
+			running =false;
+			
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+	
+	public void run() {
+		//System.out.println("akwdh");
+		int fps = 40 , FPScounter=0 , compRefresh =0;
+		double then = System.nanoTime(), amountOfNanos = 1000000000/ fps, 
+				now, timeDiff ,timer = System.currentTimeMillis();
+		while(running){
+			
+			now = System.nanoTime();
+			timeDiff = now - then  ;
+			while (timeDiff > amountOfNanos ){
+				//System.out.println("akwdh");
+				then += amountOfNanos;
+				timeDiff = now - then ;
+				FPScounter ++;
+				tick();	
+			}
+			render();
+			compRefresh ++;
+			if (System.currentTimeMillis() - timer >= 1000 ){
+				timer += 1000;
+				System.out.printf("%s %s \n",FPScounter, compRefresh );
+				//System.out.println("FPS >" +FPScounter + "  computer refresh >" + compRefresh);
+				FPScounter =0 ;
+				compRefresh =0 ;
+			}
+		}
+		stop();
+				
+	}
+	private void render() {
+
+		
+	}
+	private void tick() {
+
+		
+	}
+	
+}
