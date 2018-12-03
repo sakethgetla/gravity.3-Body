@@ -1,0 +1,218 @@
+package hackathon;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.swing.*;
+
+public class teacher extends JFrame implements ActionListener {
+
+	JTextField text;
+	JButton button, button1;
+	JPanel panel;
+	teacher stu;
+	// List<msgs> messageList = new List<msgs>(10);
+	public static ArrayList<ArrayList<Messages>> messageList = new ArrayList<ArrayList<Messages>>();
+	
+	//ArrayList<Messages> messageList = new ArrayList<>();
+	
+	ArrayList<student> studentList = new ArrayList<>();
+
+	// buttons btns = buttons
+	// msgs msg[] = new msgs[10];
+
+	int msgCount = 0;
+
+	public static void main(String[] args) {
+		teacher frame = new teacher();
+		frame.setVisible(true);
+		frame.setSize(400, 400);
+		frame.setTitle("teacher");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 //frame.setLayout(null);
+
+	}
+	
+	//JLabel jl = new JLabel();
+	teacher() {
+		
+		panel = new JPanel();
+		panel.setBackground(Color.CYAN);
+		//jl.setIcon(new ImageIcon( "C:/home/a/eclipse-workspace/hackathon/src/backgroundd.png"));
+		//jl.setLocation(0,0);
+		//panel.add(jl);
+		Dimension size = new Dimension(500, 400);
+		panel.setPreferredSize(size);
+		panel.setLocation(0, 0);
+		//panel.setLayout(null);
+
+		text = new JTextField(20);
+		panel.add(text);
+		text.setLocation(150, 20);
+		text.setSize(220, 20);
+		button1 = new JButton("okay");
+
+		button1.addActionListener(this);
+		button1.setLocation(375, 20);
+		button1.setSize(50, 20);
+		panel.add(button1);
+
+		button = new JButton("new student");
+		// button.setBounds(250,300,300,250);
+		button.addActionListener(this);
+		button.setLocation(50, 20);
+		button.setSize(80, 20);
+
+		panel.add(button);
+
+		setLayout(new FlowLayout());
+		/*
+		 * studentList.add(new student()); studentList.get(0).setVisible(true);
+		 * studentList.get(0).setSize(400,400); studentList.get(0).setTitle("student");
+		 */
+		add(panel);
+
+	}
+
+	// @Override
+	public void actionPerformed(ActionEvent event) {
+		int count = 0;
+		//messageList.add(new ArrayList<Messages>());
+		if (event.getActionCommand().equals("new student")) {
+			//createStudent();
+			
+			messageList.add(new ArrayList<Messages>());
+			
+			student vv;
+			vv = new student();
+			studentList.add(vv);
+			vv.setVisible(true);
+			vv.setSize(400, 400);
+			vv.setTitle("student");
+		
+			for (int i = 0; i < messageList.get(0).size(); i++) { // find all the messages
+				
+				messageList.get( messageList.size()-1).add(new Messages(messageList.get(0).get(i).msg,0,this)) ;
+			//for (int test = 0; test < studentList.size(); test++) { // add all the messages to all the students
+
+				Messages msgL;
+				//msgL = new Messages(messageList.get(i).msg,messageList.get(i).getCount(),this);
+				msgL = messageList.get(messageList.size()-1).get(i) ;
+				msgL.setBackground(Color.magenta);
+				vv.addJPanel(msgL);
+			//}
+			}
+
+		
+		}
+		if (event.getActionCommand().equals("okay")) {
+			String msgt = text.getText();
+			//this.panel.
+			// System.out.println("fdsfs");
+			
+			// Messegs
+			//messageList.add(new Messages(msgt, 0,this));
+			// System.out.println(""+ msgt);
+
+			//reset();
+			Messages newMessage = new Messages(msgt, 0,this);
+			messageList.get(0).add(newMessage);
+			panel.add(newMessage);
+			
+			//int y = 200 + ( (messageList.get(0).size()-1) * 20);
+			//newMessage.setLocation(0, y);
+			newMessage.setSize(400, 20);
+			//System.out.println(messageList.size());
+			for (int i = 0; i < messageList.size(); i++) {
+				ArrayList<Messages> currentMessages = messageList.get(i);
+				Messages msgL = new Messages(msgt, 0,this);
+				//msgL = new Messages(msgt,0, this);
+
+					
+				studentList.get(i).addJPanel(msgL);
+			
+				//y = 200 + ( (currentMessages.size()-1) * 20);
+				//System.out.println(y);
+				//msgL.setLocation(0, y);
+				msgL.setSize(400, 20);
+				
+			}
+			
+
+			//for (int i = 0; i < messageList.size(); i++) { // find all the messages
+
+		
+			//}
+
+			for (int test = 0; test < studentList.size(); test++) { // add all the messages to all the students
+
+				
+			}
+
+			panel.revalidate();
+			panel.repaint();
+			revalidate();
+			repaint();
+
+			// button = new JButton(msgt);
+			// button.addActionListener(this);
+			// button.setSize(250,250);
+			// button.setLocation(50,msgCount);
+			// add(button);
+
+			// button.
+			// msgs.add(new msg(5,5,5,5,msgt););
+
+		}
+		
+		
+
+	}
+	
+	public void createStudent() {
+		stu = new teacher();
+		
+		
+		
+		
+		
+	}
+	
+	
+
+
+	public void voter(int vc) {
+		// find all the messages
+			
+		for (int test = 0; test < studentList.size(); test++) { 
+			// add all the messages to
+			//for (int test = 0; test < studentList.size(); test++) { 
+			// add all the messages to all the students
+
+				Messages msgL;
+				//msgL = new Messages(messageList.get(i).msg,messageList.get(i).getCount(),this);
+				//msgL = messageList.get() ;
+
+				//studentList.get(studentList.size()-1).addJPanel(msgL);
+			//}
+				reset();
+				panel.revalidate();
+				panel.repaint();
+				revalidate();
+				repaint();
+			}
+	}
+
+	private void reset() {
+		
+		// TODO Auto-generated method stub
+
+	}
+
+}

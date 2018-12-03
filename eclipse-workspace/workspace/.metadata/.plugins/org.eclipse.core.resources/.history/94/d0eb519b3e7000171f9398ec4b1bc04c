@@ -1,0 +1,148 @@
+package game;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+import javax.transaction.xa.XAException;
+
+import java.io.BufferedReader;
+
+public class fileRead {
+
+	private Scanner x , p, a,q , w,e;
+	String[] listWord = null;
+	String[] halfWord = null;
+	String[] pre = null;
+	int length = 0;
+
+	public static void main(String[] args) throws IOException {
+
+	}
+
+
+	public fileRead() {
+	
+	}
+	public void openFile() {
+		System.out.println("akuhd");
+		try {
+
+			x = new Scanner(new File("FullWord.txt"));
+
+			/*
+			 * BufferedReader in = new BufferedReader(new
+			 * FileReader("list.txt"));
+			 * 
+			 * File file1 = new File("fullWord.txt"); FileReader fr = new
+			 * FileReader(file1);
+			 * 
+			 * 
+			 * int length = (int) file1.length();
+			 * 
+			 * //listWord = new String [length]; //while(in.readLine() )
+			 * 
+			 * for(int i=0; i<length ; i++){ // listWord[i] = (String)fr.read();
+			 * 
+			 * }fr.close();
+			 */
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public void readFile() throws FileNotFoundException{
+		String switcher ;
+		while(x.hasNext()){
+			length +=1;
+			System.out.println(x.next());
+		}
+		
+		System.out.println("akuhd");
+		x.close();
+		p = new Scanner(new File("FullWord.txt"));
+		listWord = new String [length];
+		for (int i=0 ; i<length ;i++){
+			System.out.println("akuhd");
+			listWord[i] = p.next() ; 
+			System.out.println(listWord[i]);
+		}
+		p.close();
+		for (int pointer = 0 ; pointer <= length-1 ; pointer++){
+			for(int index = pointer+1 ; index >= 1 ; index -- ){
+				if ( listWord[index].compareTo(listWord[index-1]) < 0  ){
+					
+					switcher = listWord[index];
+					listWord[index] = listWord[index-1];
+					listWord[index-1] = switcher ;
+									
+				}
+			}
+		}
+		
+		q = new Scanner(new File("halfWord.txt"));
+		
+		while(q.hasNext()){
+			length +=1;
+			System.out.println(q.next());
+		}
+		
+		System.out.println("akuhd");
+		q.close();
+		
+		a = new Scanner(new File("halfWord.txt"));
+		halfWord = new String [length];
+		for (int i=0 ; i<length ;i++){
+			System.out.println("akuhd");
+
+			halfWord[i] = a.next() ; 
+			System.out.println(halfWord[i]);
+		}
+		a.close();
+		for (int pointer = 0 ; pointer <= length-1 ; pointer++){
+			for(int index = pointer+1 ; index >= 1 ; index -- ){
+				if ( halfWord[index].compareTo(halfWord[index-1]) < 0  ){
+					
+					switcher = halfWord[index];
+					halfWord[index] = halfWord[index-1];
+					halfWord[index-1] = switcher ;
+					
+				}
+			}
+		}
+		w = new Scanner(new File("halfWord.txt"));
+		
+		while(w.hasNext()){
+			length +=1;
+			System.out.println(w.next());
+		}
+		
+		System.out.println("akuhd");
+		w.close();
+		
+		e = new Scanner(new File("pre.txt"));
+		pre = new String [length];
+		for (int i=0 ; i<length ;i++){
+			System.out.println("akuhd");
+
+			pre[i] = e.next() ; 
+			System.out.println(pre[i]);
+		}
+		e.close();
+		for (int pointer = 0 ; pointer <= length-1 ; pointer++){
+			for(int index = pointer+1 ; index >= 1 ; index -- ){
+				if ( pre[index].compareTo(pre[index-1]) < 0  ){
+					
+					switcher = pre[index];
+					pre[index] = pre[index-1];
+					pre[index-1] = switcher ;
+					
+				}
+			}
+		}
+	}
+
+}
